@@ -23,13 +23,13 @@ public class CustomListTest {
     public void addCityTest(){
         int listSize = list.countCities();
         list.addCity(new City("Halifax", "NS"));
-        assertEquals(listSize+1, list.getCount());
+        assertEquals(listSize+1, list.countCities());
     }
 
     @Test
     void testHasCity() {
         City city = new City("Edmonton", "Alberta");
-        assertTrue(list.hasCity(city));
+        assertFalse(list.hasCity(city));
         City city_2 = new City("Vancouver", "British Columbia");
         assertFalse(list.hasCity(city_2));
         list.add(city_2);
@@ -38,17 +38,10 @@ public class CustomListTest {
 
     @Test
     void testDelete() {
-        City city = new City("Edmonton", "Alberta");
+        City city = new City("Vancouver", "British Columbia");
+        list.add(city);
         assertTrue(list.hasCity(city));
         list.delete(city);
-        assertThrows(IllegalArgumentException.class, ()->{
-            list.delete(city);
-        });
-        assertFalse(list.hasCity(city));
-        City city_2 = new City("Vancouver", "British Columbia");
-        list.add(city_2);
-        assertTrue(list.hasCity(city_2));
-        list.delete(city_2);
         assertFalse(list.hasCity(city));
         City city_3 = new City("Calgary", "Alberta");
         assertThrows(IllegalArgumentException.class, ()->{
@@ -58,17 +51,17 @@ public class CustomListTest {
 
     @Test
     void testCountCities(){
-        assertEquals(1, list.countCities());
+        assertEquals(0, list.countCities());
         City city = new City("Vancouver", "British Columbia");
         list.add(city);
-        assertEquals(2, list.countCities());
-        list.delete(city);
         assertEquals(1, list.countCities());
+        list.delete(city);
+        assertEquals(0, list.countCities());
         City city_2 = new City("Calgary", "Alberta");
         list.add(city_2);
         City city_3 = new City("Iqaluit", "Nunavut");
         list.add(city_3);
-        assertEquals(3, list.countCities());
+        assertEquals(2, list.countCities());
     }
 
 
