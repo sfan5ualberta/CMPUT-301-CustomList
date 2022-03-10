@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomList extends ArrayAdapter<City> {
 
@@ -48,10 +49,38 @@ public class CustomList extends ArrayAdapter<City> {
 
     }
 
-    public int getCount(){
-        return cities.size();
+
+
+    public int countCities(){
+        return this.cities.size();
     }
+
     public void addCity(City city){
-        return;
+        if(cities.contains(city)) {
+            throw new IllegalArgumentException();
+        }
+        cities.add(city);
     }
+
+    public boolean hasCity(City city){
+        /*List<City> list = this.cities;
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).getCityName() == city.getCityName() && list.get(i).getProvinceName() == city.getProvinceName()){
+                return true;
+            }
+        }*/
+        return false;
+    }
+
+    public void delete(City city) {
+        /*List<City> list = this.cities;
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).getCityName() == city.getCityName() && list.get(i).getProvinceName() == city.getProvinceName()){
+                list.remove(i);
+                return;
+            }
+        }
+        throw new IllegalArgumentException();*/
+    }
+
 }
